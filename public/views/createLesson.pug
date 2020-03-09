@@ -1,0 +1,44 @@
+extends layout
+
+block content
+
+  .container.mt-4.mb-4
+    form(action=`/lessons/create`, method="POST")
+      .form-row
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Выберите Группу
+          select(name="name")#inputState.form-control
+            for group in groups
+              option(value=`${group.name}`)= group.name
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Название Предмета
+          input(name="subject")#inputState.form-control
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Кабинет
+          input(name="room")#inputState.form-control
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Время
+          select(name="day", required="true")#inputState.form-control
+            option(value="Понедельник") Понедельник
+            option(value="Вторник") Вторник
+            option(value="Среда") Среда
+            option(value="Четверг") Четверг
+            option(value="Пятница") Пятница
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Время
+          select(name="time", required="true")#inputState.form-control
+            option(value="1") 08:30 - 09:20
+            option(value="2") 09:35 - 10:25
+            option(value="3") 10:40 - 11:30
+            option(value="4") 11:45 - 12:35
+            option(value="5") 12:50 - 13:40
+            option(value="6") 14:00 - 14:50
+            option(value="7") 15:05 - 15:55
+            option(value="8") 16:10 - 17:00
+            option(value="9") 17:15 - 18:05
+            option(value="10") 18:20 - 19:10
+            option(value="11") 19:25 - 20:15
+            option(value="12") 20:30 - 21:20
+            
+          
+        button(type="submit").btn.btn-primary.col-md-6.offset-md-3 Создать Занятие

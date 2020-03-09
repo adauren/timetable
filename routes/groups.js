@@ -40,13 +40,19 @@ router.post(
 
       group = await newGroup.save();
 
-      res.render("index");
+      res.redirect("/");
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
   }
 );
+
+router.get("/", async (req, res) => {
+  const groups = await Group.find();
+
+  res.render("groups", { title: "Все группы", groups: groups });
+});
 
 // Удалить ОДНУ группу
 router.delete("/:id", async (req, res) => {
