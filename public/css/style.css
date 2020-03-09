@@ -1,0 +1,54 @@
+body {
+  height: 100vh;
+}
+
+a {
+  cursor: pointer;
+}
+
+.menu-icon {
+  display: none;
+}
+
+.schedule-container {
+  text-align: center;
+}
+
+.tabs {
+  justify-content: center;
+}
+
+.tab-item:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0.25rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.footer-link {
+  font-size: 20px;
+}
+
+.footer-link:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .brand-link {
+    padding-left: 0;
+  }
+
+  #navbarNav {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+}

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  .container.mt-4.mb-4
+    form(action=`/groups/create`, method="POST")
+      .form-row
+        .form-group.col-md-6.offset-md-3
+          label(for="inputState") Название Группы
+          input(name="name")#inputState.form-control
+          
+        button(type="submit").btn.btn-primary.col-md-6.offset-md-3 Создать Группу

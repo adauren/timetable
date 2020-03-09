@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container
+    .row.tabs
+      ul(role="tablist").nav.nav-pills.mt-4
+        li.nav-item.tab-item
+          a.nav-link.active Понедельник
+        li.nav-item.tab-item
+          a.nav-link Вторник
+        li.nav-item.tab-item
+          a.nav-link Среда
+        li.nav-item.tab-item
+          a.nav-link Четверг
+        li.nav-item.tab-item
+          a.nav-link Пятница
+
+    .schedule.row.mb-4
+      .schedule-container.col-12.col-md-6.offset-md-3
+        h3.my-4 Понедельник
+        ul.list-group
+          if lessons.length > 0
+            for lesson in lessons
+              li.list-group-item
+                h5= lesson.time
+                p= lesson.name
+          else
+            p У группы нету занятии
+          

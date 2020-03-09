@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h4= title
+  if groups
+    ul
+      for group in groups
+        li 
+          a(href=`lessons/${group.id}`)= group.name
