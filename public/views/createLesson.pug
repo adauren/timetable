@@ -17,6 +17,12 @@ block content
           label(for="inputState") Кабинет
           input(name="room")#inputState.form-control
         .form-group.col-md-6.offset-md-3
+          label(for="inputState") Тип занятия
+          select(name="type", required="true")#inputState.form-control
+            option(value="Лекция") Лекция
+            option(value="Лабораторное занятие") Лабораторное занятие
+            option(value="Практическое занятие") Практическое занятие
+        .form-group.col-md-6.offset-md-3
           label(for="inputState") Время
           select(name="day", required="true")#inputState.form-control
             option(value="Понедельник") Понедельник

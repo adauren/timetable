@@ -39,6 +39,10 @@ a {
   text-decoration: none;
 }
 
+.day:hover {
+  color: #fff !important;
+}
+
 @media (max-width: 768px) {
   .brand-link {
     padding-left: 0;

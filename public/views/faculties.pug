@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    .container
+        if faculties.length > 0
+            ul
+                for faculty in faculties
+                    li= faculty.name

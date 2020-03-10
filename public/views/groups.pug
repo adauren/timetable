@@ -3,7 +3,9 @@ extends layout
 block content
   .container
     h4= title
+    a(href="/groups/create") Создать Группу
     if groups
       ul
         for group in groups
-          li= group.name
+          li= `${group.name}`
+          a(href=`groups/${group.id}`) Удалить

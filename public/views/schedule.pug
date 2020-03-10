@@ -3,86 +3,81 @@ extends layout
 block content
   .container
     .row.tabs
-      ul(role="tablist").nav.nav-pills.mt-4
+      ul(role="tablist", id="scheduleTab").nav.nav-pills.mt-4
         li.nav-item.tab-item
-          a(href="#monday").nav-link.active Понедельник
+          a(href="#monday", id="monday-tab", data-toggle="pill", aria-controls="monday", aria-selected="true").nav-link.day.active Понедельник
         li.nav-item.tab-item
-          a(href="#tuesday").nav-link Вторник
+          a(href="#tuesday", id="tuesday-tab", data-toggle="pill", aria-controls="tuesday", aria-selected="false").nav-link.day Вторник
         li.nav-item.tab-item
-          a(href="#wednesday").nav-link Среда
+          a(href="#wednesday", id="wednesday-tab", data-toggle="pill", aria-controls="wednesday", aria-selected="false").nav-link.day Среда
         li.nav-item.tab-item
-          a(href="#thursday").nav-link Четверг
+          a(href="#thursday", id="thursday-tab", data-toggle="pill", aria-controls="thursday", aria-selected="false").nav-link.day Четверг
         li.nav-item.tab-item
-          a(href="#friday").nav-link Пятница
+          a(href="#friday", id="friday-tab", data-toggle="pill", aria-controls="friday", aria-selected="false").nav-link.day Пятница
 
-    .schedule.row.mb-4
-      .schedule-container.col-12.col-md-6.offset-md-3
+    .schedule.tab-content.row.mb-4
+      div(aria-labelledby="monday-tab", id="monday", role="tabpanel").schedule-container.tab-pane.fade.show.active.col-12.col-md-6.offset-md-3
         h3.my-4 Понедельник
         ul.list-group
           if lessons.length > 0 
             for lesson in lessons
               if lesson.day === 'Понедельник'
                 li.list-group-item
-                  h3= lesson.time
-                  h2= lesson.name
-                  h4= lesson.room
+                  h5= lesson.time
+                  p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
                   a(href=`/lessons/${lesson.id}`) Удалить занятие
           else
-            p У группы нету занятии
+            p У группы нет занятии
       
-      .schedule-container.col-12.col-md-6.offset-md-3
+      div(aria-labelledby="tuesday-tab", class="tab-pane", id="tuesday", role="tabpanel").schedule-container.tab-pane.fade.col-12.col-md-6.offset-md-3
         h3.my-4 Вторник
         ul.list-group
           if lessons.length > 0 
             for lesson in lessons
               if lesson.day === 'Вторник'
                 li.list-group-item
-                  h3= lesson.time
-                  h2= lesson.name
-                  h4= lesson.room
+                  h5= lesson.time
+                  p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
                   a(href=`/lessons/${lesson.id}`) Удалить занятие
           else
-            p У группы нету занятии
+            p У группы нет занятии
       
-      .schedule-container.col-12.col-md-6.offset-md-3
+      div(aria-labelledby="wednesday-tab", class="tab-pane", id="wednesday", role="tabpanel").schedule-container.tab-pane.fade.col-12.col-md-6.offset-md-3
         h3.my-4 Среда
         ul.list-group
           if lessons.length > 0 
             for lesson in lessons
               if lesson.day === 'Среда'
                 li.list-group-item
-                  h3= lesson.time
-                  h2= lesson.name
-                  h4= lesson.room
+                  h5= lesson.time
+                  p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
                   a(href=`/lessons/${lesson.id}`) Удалить занятие
           else
-            p У группы нету занятии
+            p У группы нет занятии
       
-      .schedule-container.col-12.col-md-6.offset-md-3
+      div(aria-labelledby="thursday-tab", class="tab-pane", id="thursday", role="tabpanel").schedule-container.tab-pane.fade.col-12.col-md-6.offset-md-3
         h3.my-4 Четверг
         ul.list-group
           if lessons.length > 0 
             for lesson in lessons
               if lesson.day === 'Четверг'
                 li.list-group-item
-                  h3= lesson.time
-                  h2= lesson.name
-                  h4= lesson.room
+                  h5= lesson.time
+                  p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
                   a(href=`/lessons/${lesson.id}`) Удалить занятие
           else
-            p У группы нету занятии
+            p У группы нет занятии
       
-      .schedule-container.col-12.col-md-6.offset-md-3
+      div(aria-labelledby="friday-tab", class="tab-pane", id="friday", role="tabpanel").schedule-container.tab-pane.fade.col-12.col-md-6.offset-md-3
         h3.my-4 Пятница
         ul.list-group
           if lessons.length > 0 
             for lesson in lessons
               if lesson.day === 'Пятница'
                 li.list-group-item
-                  h3= lesson.time
-                  h2= lesson.name
-                  h4= lesson.room
+                  h5= lesson.time
+                  p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
                   a(href=`/lessons/${lesson.id}`) Удалить занятие
           else
-            p У группы нету занятии
+            p У группы нет занятии
           

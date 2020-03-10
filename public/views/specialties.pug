@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+    .container
+        h4= title
+        a(href="/specialties/create") Создать Специальность
+        if specialties.length > 0
+            ul
+                for specialty in specialties
+                    li= specialty.name
+                    a(href=`/specialties/delete/${specialty.id}`) Удалить 

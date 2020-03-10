@@ -23,6 +23,10 @@ const LessonSchema = new Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    required: true
+  },
   group: {
     type: Schema.Types.ObjectId,
     ref: "group"

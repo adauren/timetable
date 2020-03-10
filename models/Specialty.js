@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const GroupSchema = new Schema({
+const SpecialtySchema = new Schema({
   name: {
     type: String,
     required: true
@@ -9,11 +9,7 @@ const GroupSchema = new Schema({
   faculty: {
     type: Schema.Types.ObjectId,
     ref: "faculty"
-  },
-  specialty: {
-    type: Schema.Types.ObjectId,
-    ref: "specialty"
   }
 });
 
-module.exports = Group = mongoose.model("group", GroupSchema);
+module.exports = Specialty = mongoose.model("specialty", SpecialtySchema);

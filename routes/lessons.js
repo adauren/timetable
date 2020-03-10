@@ -27,6 +27,9 @@ router.post(
     check("day", "День урока обязательна к заполнению")
       .not()
       .isEmpty(),
+    check("type", "Тип занятия обязательна к заполнению")
+      .not()
+      .isEmpty(),
     check("time", "Время урока обязательна к заполнению")
       .not()
       .isEmpty()
@@ -37,7 +40,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    var { room, subject, day, time, name } = req.body;
+    var { room, subject, day, type, time, name } = req.body;
 
     try {
       await Group.findOne({ name: name });
@@ -49,37 +52,6 @@ router.post(
     }
 
     try {
-      let lesson = await Lesson.find()
-        .where("room")
-        .equals(room)
-        .where("day")
-        .equals(day)
-        .where("time")
-        .equals(time);
-
-      let group = await Group.findOne({ name: name });
-      let lessonByGroup = await Lesson.find()
-        .where("day")
-        .equals(day)
-        .where("time")
-        .equals(time)
-        .where("group")
-        .equals(group.id);
-
-      if (lesson.length > 0) {
-        return res.status(400).json({
-          errors: [{ msg: `Кабинет ${room} на время ${time} уже занята` }]
-        });
-      }
-
-      if (lessonByGroup.length > 0) {
-        return res.status(400).json({
-          errors: [
-            { msg: `У группы ${group.name} на время ${time} уже есть занятия` }
-          ]
-        });
-      }
-
       let timeOrder = time;
 
       switch (time) {
@@ -123,9 +95,43 @@ router.post(
           break;
       }
 
+      let lesson = await Lesson.find()
+        .where("room")
+        .equals(room)
+        .where("day")
+        .equals(day)
+        .where("time")
+        .equals(time);
+
+      /* return console.log(time); */
+
+      let group = await Group.findOne({ name: name });
+      let lessonByGroup = await Lesson.find()
+        .where("day")
+        .equals(day)
+        .where("time")
+        .equals(time)
+        .where("group")
+        .equals(group.id);
+
+      if (lesson.length > 0) {
+        return res.status(400).json({
+          errors: [{ msg: `Кабинет ${room} на время ${time} уже занята` }]
+        });
+      }
+
+      if (lessonByGroup.length > 0) {
+        return res.status(400).json({
+          errors: [
+            { msg: `У группы ${group.name} на время ${time} уже есть занятия` }
+          ]
+        });
+      }
+
       const newLesson = new Lesson({
         room: room,
         name: subject,
+        type: type,
         day: day,
         time: time,
         timeOrder: timeOrder,

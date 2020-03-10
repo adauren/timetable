@@ -18,6 +18,8 @@ app.use(
 app.use("/", require("./routes/index"));
 app.use("/groups", require("./routes/groups"));
 app.use("/lessons", require("./routes/lessons"));
+app.use("/faculties", require("./routes/faculties"));
+app.use("/specialties", require("./routes/specialties"));
 
 const port = process.env.PORT || 5000;
 
