@@ -4,6 +4,8 @@ const { check, validationResult } = require("express-validator");
 
 const Specialty = require("../models/Specialty");
 const Faculty = require("../models/Faculty");
+const Group = require("../models/Group");
+const Lesson = require("../models/Lesson");
 
 router.get("/", async (req, res) => {
   try {
@@ -76,13 +78,21 @@ router.get("/delete/:specialty_id", async (req, res) => {
       return res.status(404).json({ msg: "Такая специальность не найдена" });
     }
 
-    await specialty.remove();
+    const groups = await Group.find({ specialty: req.params.specialty_id });
+
+    groups.map(async group => {
+      await Lesson.find({ group: group.id }).deleteMany();
+    });
+
+    await Group.find({ specialty: req.params.specialty_id }).deleteMany();
+
+    await specialty.deleteOne();
 
     res.redirect("/specialties");
   } catch (err) {
     console.error(err.message);
     if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "акая специальность не найдена" });
+      return res.status(404).json({ msg: "Такая специальность не найдена" });
     }
     res.status(500).send("Ошибка сервера");
   }

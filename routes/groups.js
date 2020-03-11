@@ -78,13 +78,15 @@ router.get("/", async (req, res) => {
 });
 
 // Удалить ОДНУ группу
-router.get("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const group = await Group.findById(req.params.id);
 
     if (!group) {
       return res.status(404).json({ msg: "Группа не найдена" });
     }
+
+    await Lesson.find({ group: req.params.id }).deleteMany();
 
     await group.remove();
 

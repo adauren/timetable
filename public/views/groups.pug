@@ -4,8 +4,10 @@ block content
   .container
     h4= title
     a(href="/groups/create") Создать Группу
-    if groups
+    if groups.length > 0
       ul
         for group in groups
           li= `${group.name}`
-          a(href=`groups/${group.id}`) Удалить
+          a(href="/groups" data-id=`${group.id}`).group-delete-btn Удалить
+  
+  script(src="../js/group.js")

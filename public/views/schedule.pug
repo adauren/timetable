@@ -25,7 +25,7 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/${lesson.id}`) Удалить занятие
+                  a(href=`/lessons/show?name=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -38,7 +38,7 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/${lesson.id}`) Удалить занятие
+                  a(href=`/lessons/show?name=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -51,7 +51,7 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/${lesson.id}`) Удалить занятие
+                  a(href=`/lessons/show?name=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -64,7 +64,7 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/${lesson.id}`) Удалить занятие
+                  a(href=`/lessons/show?name=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -77,7 +77,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/${lesson.id}`) Удалить занятие
+                  a(href=`/lessons/show?name=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
-          
+  
+  script(src="../js/schedule.js")

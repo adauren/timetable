@@ -103,8 +103,6 @@ router.post(
         .where("time")
         .equals(time);
 
-      /* return console.log(time); */
-
       let group = await Group.findOne({ name: name });
       let lessonByGroup = await Lesson.find()
         .where("day")
@@ -149,28 +147,36 @@ router.post(
 );
 
 // Уроки одной группы
-router.get("/show", async (req, res) => {
-  try {
-    const group = await Group.findOne({ name: req.query.name });
+router.get(
+  "/show",
+  [
+    check("name", "Вы должны выбрать группу")
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    try {
+      const group = await Group.findOne({ name: req.query.name });
 
-    const lessons = await Lesson.find()
-      .where("group")
-      .equals(group.id)
-      .sort({ timeOrder: 1 });
+      const lessons = await Lesson.find()
+        .where("group")
+        .equals(group.id)
+        .sort({ timeOrder: 1 });
 
-    res.render("schedule", {
-      lessons: lessons,
-      group: group,
-      title: `Расписание группы ${group.name}`
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Ошибка сервера");
+      res.render("schedule", {
+        lessons: lessons,
+        group: group,
+        title: `Расписание группы ${group.name}`
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Ошибка сервера");
+    }
   }
-});
+);
 
 // Удалить урок
-router.get("/:lesson_id", async (req, res) => {
+router.delete("/:lesson_id", async (req, res) => {
   try {
     const lesson = await Lesson.findById(req.params.lesson_id);
 
@@ -179,8 +185,7 @@ router.get("/:lesson_id", async (req, res) => {
     }
 
     await lesson.remove();
-
-    res.redirect("/");
+    return;
   } catch (err) {
     console.error(err.message);
     if (err.kind === "ObjectId") {

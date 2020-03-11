@@ -2,7 +2,12 @@ extends layout
 
 block content
     .container
+        h4= title
+        a(href="/faculties/create") Создать Факультет
         if faculties.length > 0
             ul
                 for faculty in faculties
                     li= faculty.name
+                    a(href="/specialties" data-id=`${faculty.id}`).faculty-delete-btn Удалить
+    
+    script(src="../js/faculty.js")
