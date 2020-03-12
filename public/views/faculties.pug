@@ -5,9 +5,19 @@ block content
         h4= title
         a(href="/faculties/create") Создать Факультет
         if faculties.length > 0
-            ul
-                for faculty in faculties
-                    li= faculty.name
-                    a(href="/specialties" data-id=`${faculty.id}`).faculty-delete-btn Удалить
+            table.table
+                thead
+                  tr
+                    th Название
+                    th Расписание
+                    th Действия
+                tbody
+                  for faculty in faculties
+                    tr
+                      td= faculty.name
+                      td
+
+                      td 
+                        a(href="/specialties" data-id=`${faculty.id}`).faculty-delete-btn Удалить
     
     script(src="../js/faculty.js")

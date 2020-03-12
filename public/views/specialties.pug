@@ -6,7 +6,16 @@ block content
         h4= title
         a(href="/specialties/create") Создать Специальность
         if specialties.length > 0
-            ul
-                for specialty in specialties
-                    li= specialty.name
-                    a(href=`/specialties/delete/${specialty.id}`) Удалить 
+            table.table
+                thead
+                  tr
+                    th Название
+                    th Расписание
+                    th Действия
+                tbody
+                  for specialty in specialties
+                    tr
+                      td= specialty.name
+                      td 
+                      td 
+                         a(href=`/specialties/delete/${specialty.id}`) Удалить 

@@ -7,25 +7,31 @@ block content
       form(action=`/lessons/create`, method="POST")
         .form-row
           .form-group.col-md-6.offset-md-3
-            label(for="inputState") Выберите Группу
-            select(name="name")#inputState.form-control
-              for group in groups
-                option(value=`${group.name}`)= group.name
+            label(for="facultyName") Выберите Факультет
+            select(required="true")#facultyName.form-control
+              for faculty in faculties
+                option(value=`${faculty.id}`)= faculty.name
+          .form-group.col-md-6.offset-md-3
+            label(for="specialtyName") Выберите Специальность
+            select(required="true")#specialtyName.form-control
+          .form-group.col-md-6.offset-md-3
+            label(for="groupName") Выберите Группу
+            select(name="groupName", required="true")#groupName.form-control
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Название Предмета
-            input(name="subject")#inputState.form-control
+            input(name="subject").form-control
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Кабинет
-            input(name="room")#inputState.form-control
+            input(name="room").form-control
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Тип занятия
-            select(name="type", required="true")#inputState.form-control
+            select(name="type", required="true").form-control
               option(value="Лекция") Лекция
               option(value="Лабораторное занятие") Лабораторное занятие
               option(value="Практическое занятие") Практическое занятие
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Время
-            select(name="day", required="true")#inputState.form-control
+            select(name="day", required="true").form-control
               option(value="Понедельник") Понедельник
               option(value="Вторник") Вторник
               option(value="Среда") Среда
@@ -33,7 +39,7 @@ block content
               option(value="Пятница") Пятница
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Время
-            select(name="time", required="true")#inputState.form-control
+            select(name="time", required="true").form-control
               option(value="1") 08:30 - 09:20
               option(value="2") 09:35 - 10:25
               option(value="3") 10:40 - 11:30
@@ -48,6 +54,8 @@ block content
               option(value="12") 20:30 - 21:20
               
             
-          button(type="submit").btn.btn-primary.col-md-6.offset-md-3 Создать Занятие
+          button(type="submit", style="background-color: #7d71b1").btn.btn-primary.col-md-6.offset-md-3 Создать Занятие
     else 
       h5 Список групп пуст. Вы должны сначала добавить как минимум одну группу
+  
+  script(src="../js/create-lesson.js")

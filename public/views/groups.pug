@@ -5,9 +5,21 @@ block content
     h4= title
     a(href="/groups/create") Создать Группу
     if groups.length > 0
-      ul
-        for group in groups
-          li= `${group.name}`
-          a(href="/groups" data-id=`${group.id}`).group-delete-btn Удалить
+      table.table
+        thead
+          tr
+            th Название
+            th Специальность
+            th Расписание
+            th Действия
+        tbody
+          for group in groups
+            tr
+              td= group.name
+              td= group.specialty.name
+              td
+                a(href=`/lessons/show?groupName=${group.name}`) Расписание
+              td 
+                a(href="/groups" data-id=`${group.id}`).group-delete-btn Удалить
   
   script(src="../js/group.js")

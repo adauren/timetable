@@ -6,22 +6,20 @@ block content
       form(action=`lessons/show`, method="GET")
         .form-row
           .form-group.col-md-6.offset-md-3
-            label(for="inputState").col-12 Выберите Факультет
-              select(name="name", required="true")#inputState.form-control
+            label(for="facultyName").col-12 Выберите Факультет
+              select(required="true")#facultyName.form-control
                 for faculty in faculties
-                  option(value=`${faculty.name}`)= faculty.name
+                  option(value=`${faculty.id}`)= faculty.name
           .form-group.col-md-6.offset-md-3
-            label(for="inputState").col-12 Выберите Специальность
-              select(name="name", required="true")#inputState.form-control
-                for specialty in specialties
-                  option(value=`${specialty.name}`)= specialty.name
+            label(for="specialtyName").col-12 Выберите Специальность
+              select(required="true")#specialtyName.form-control
+                
           .form-group.col-md-6.offset-md-3
-            label(for="inputState").col-12 Выберите Группу
-              select(name="name", required="true")#inputState.form-control
-                for group in groups
-                  option(value=`${group.name}`)= group.name
-        button(type="submit").btn.btn-primary.btn-block.col-md-6.offset-md-3 Показать расписание
+            label(for="groupName").col-12 Выберите Группу
+              select(name="groupName", required="true")#groupName.form-control
+                
+        button(type="submit", style="background-color: #7d71b1").btn.btn-primary.btn-block.col-md-6.offset-md-3 Показать расписание
     else
       h5 Список групп пуст
           
-        
+  script(src="../js/index.js")

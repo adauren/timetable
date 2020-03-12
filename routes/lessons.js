@@ -4,18 +4,20 @@ const { check, validationResult } = require("express-validator");
 
 const Lesson = require("../models/Lesson");
 const Group = require("../models/Group");
+const Faculty = require("../models/Faculty");
 
 // Создать урок для группы GET
 router.get("/create", async (req, res) => {
   const groups = await Group.find();
-  res.render("createLesson", { groups: groups });
+  const faculties = await Faculty.find();
+  res.render("createLesson", { groups: groups, faculties: faculties });
 });
 
 // Создать урок для группы POST
 router.post(
   "/create",
   [
-    check("name", "Выберите группу")
+    check("groupName", "Выберите группу")
       .not()
       .isEmpty(),
     check("room", "Кабинет урока обязательна к заполнению")
@@ -40,10 +42,10 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    var { room, subject, day, type, time, name } = req.body;
+    var { room, subject, day, type, time, groupName } = req.body;
 
     try {
-      await Group.findOne({ name: name });
+      await Group.findOne({ name: groupName });
     } catch (err) {
       console.error(err.message);
       return res.status(400).json({
@@ -103,7 +105,7 @@ router.post(
         .where("time")
         .equals(time);
 
-      let group = await Group.findOne({ name: name });
+      let group = await Group.findOne({ name: groupName });
       let lessonByGroup = await Lesson.find()
         .where("day")
         .equals(day)
@@ -138,7 +140,7 @@ router.post(
 
       lesson = await newLesson.save();
 
-      res.redirect(`show?name=${group.name}`);
+      res.redirect(`show?groupName=${group.name}`);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Ошибка сервера");
@@ -156,7 +158,7 @@ router.get(
   ],
   async (req, res) => {
     try {
-      const group = await Group.findOne({ name: req.query.name });
+      const group = await Group.findOne({ name: req.query.groupName });
 
       const lessons = await Lesson.find()
         .where("group")

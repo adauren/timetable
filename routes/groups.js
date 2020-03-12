@@ -71,8 +71,17 @@ router.post(
   }
 );
 
+// Получить список групп по специальности
+router.get("/:id", async (req, res) => {
+  const groups = await Group.find()
+    .where("specialty")
+    .equals(req.params.id);
+
+  res.json(groups);
+});
+
 router.get("/", async (req, res) => {
-  const groups = await Group.find();
+  const groups = await Group.find().populate("specialty");
 
   res.render("groups", { title: "Все группы", groups: groups });
 });

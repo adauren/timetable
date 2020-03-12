@@ -43,6 +43,23 @@ a {
   color: #fff !important;
 }
 
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #7d71b1;
+}
+
+.tab-item:hover {
+  background-color: #7d71b1;
+}
+
+a {
+  color: #7d71b1;
+  font-weight: bold;
+}
+a:hover {
+  color: #514877;
+}
+
 @media (max-width: 768px) {
   .brand-link {
     padding-left: 0;

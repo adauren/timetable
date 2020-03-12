@@ -11,22 +11,26 @@ html
     header.header
       nav.navbar.navbar-light.bg-light.navbar-expand-md.vs-navbar
         .navbar-brand.mr-auto
-          a(href="/").nav-link.brand-link Расписание ЮКГУ
+          a(href="/", style="font-size: 25px").nav-link.brand-link.d-flex.align-items-center 
+            span.order-2.ml-4 Расписание ЮКГУ
+            img(src="../img/logo.png", style="width: 50px", alt="").order-1
+              
+            
 
         #navbarNav
           ul.navbar-nav
             li.nav-item
-              a(href="/").nav-link Расписание
+              a(href="/", style="font-size: 20px").nav-link Расписание
             li.nav-item
-              a(href="/lessons/create").nav-link Создать занятие
+              a(href="/lessons/create", style="font-size: 20px").nav-link Создать занятие
             li.nav-item
-              a(href="/groups").nav-link Группы
+              a(href="/groups", style="font-size: 20px").nav-link Группы
             li.nav-item
-              a(href="/specialties").nav-link Специальности
+              a(href="/specialties", style="font-size: 20px").nav-link Специальности
             li.nav-item
-              a(href="/faculties").nav-link Факультеты
+              a(href="/faculties", style="font-size: 20px").nav-link Факультеты
             li.nav-item
-              a(href="/breaks").nav-link Звонки
+              a(href="/breaks", style="font-size: 20px").nav-link Звонки
           
         span.navbar-toggler-icon.menu-icon
     
