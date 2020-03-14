@@ -66,7 +66,7 @@ router.post(
       res.redirect("/");
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      return res.render("404");
     }
   }
 );
@@ -102,10 +102,17 @@ router.delete("/:id", async (req, res) => {
     res.redirect("/groups");
   } catch (err) {
     console.error(err.message);
+
     if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Группа не найдена!" });
+      let er = [
+        {
+          msg: `Группа не найдена!`
+        }
+      ];
+
+      return res.render("error", { errors: er });
     }
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 

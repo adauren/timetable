@@ -1,0 +1,8 @@
+extends layout
+
+block content
+
+    .container.mt-5
+        div.alert.alert-danger 
+            for error in errors
+                p= error.msg

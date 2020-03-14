@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     res.render("faculties", { title: "Все Факультеты", faculties: faculties });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 
@@ -50,7 +50,7 @@ router.post(
       res.redirect("/faculties");
     } catch (errr) {
       console.error(err.message);
-      res.status(500).send("Ошибка сервера");
+      return res.render("404");
     }
   }
 );
@@ -74,10 +74,17 @@ router.delete("/:id", async (req, res) => {
     await Faculty.findById(req.params.id).deleteOne();
   } catch (err) {
     console.error(err.message);
+
     if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Группа не найдена!" });
+      let er = [
+        {
+          msg: `Факультет не найден!`
+        }
+      ];
+
+      return res.render("error", { errors: er });
     }
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 

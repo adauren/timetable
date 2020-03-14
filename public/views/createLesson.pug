@@ -1,7 +1,6 @@
 extends layout
 
 block content
-
   .container.mt-4.mb-4
     if groups.length > 0
       form(action=`/lessons/create`, method="POST")
@@ -22,7 +21,7 @@ block content
             input(name="subject").form-control
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Кабинет
-            input(name="room").form-control
+            input(name="room", type="number").form-control
           .form-group.col-md-6.offset-md-3
             label(for="inputState") Тип занятия
             select(name="type", required="true").form-control
@@ -30,7 +29,7 @@ block content
               option(value="Лабораторное занятие") Лабораторное занятие
               option(value="Практическое занятие") Практическое занятие
           .form-group.col-md-6.offset-md-3
-            label(for="inputState") Время
+            label(for="inputState") День
             select(name="day", required="true").form-control
               option(value="Понедельник") Понедельник
               option(value="Вторник") Вторник
@@ -52,6 +51,9 @@ block content
               option(value="10") 18:20 - 19:10
               option(value="11") 19:25 - 20:15
               option(value="12") 20:30 - 21:20
+          .form-group.col-md-6.offset-md-3
+            label(for="inputState") Количество уроков
+            input(type="number", name="lessonCount", max="4", min="1", required="true").form-control
               
             
           button(type="submit", style="background-color: #7d71b1").btn.btn-primary.col-md-6.offset-md-3 Создать Занятие

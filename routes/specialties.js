@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 
@@ -65,7 +65,7 @@ router.get("/:faculty_id", async (req, res) => {
     res.json(specialties);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 
@@ -91,10 +91,17 @@ router.get("/delete/:specialty_id", async (req, res) => {
     res.redirect("/specialties");
   } catch (err) {
     console.error(err.message);
+
     if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Такая специальность не найдена" });
+      let er = [
+        {
+          msg: `Такая специальность не найдена`
+        }
+      ];
+
+      return res.render("error", { errors: er });
     }
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 

@@ -21,13 +21,13 @@ router.get("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Ошибка сервера");
+    return res.render("404");
   }
 });
 
 // Перерыв
 router.get("/breaks", async (req, res) => {
-  res.render("breaks");
+  return res.render("breaks");
 });
 
 module.exports = router;

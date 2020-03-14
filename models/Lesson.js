@@ -20,7 +20,7 @@ const LessonSchema = new Schema({
     required: true
   },
   timeOrder: {
-    type: String,
+    type: Number,
     required: true
   },
   type: {
