@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const Lesson = require("../models/Lesson");
 const Faculty = require("../models/Faculty");
@@ -8,16 +9,26 @@ const Specialty = require("../models/Specialty");
 const Group = require("../models/Group");
 
 // Создать группу GET
-router.get("/create", async (req, res) => {
+router.get("/create", auth, async (req, res) => {
   const faculties = await Faculty.find();
   const specialties = await Specialty.find();
 
-  res.render("createGroup", { faculties: faculties, specialties: specialties });
+  let isUser = false;
+  if (req.session.user) {
+    isUser = true;
+  }
+
+  res.render("createGroup", {
+    faculties: faculties,
+    specialties: specialties,
+    isUser: isUser
+  });
 });
 
 // Создать группу POST
 router.post(
   "/create",
+  auth,
   [
     check("faculty", "Факультет группы обязательна к заполнению")
       .not()
@@ -83,11 +94,16 @@ router.get("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   const groups = await Group.find().populate("specialty");
 
-  res.render("groups", { title: "Все группы", groups: groups });
+  let isUser = false;
+  if (req.session.user) {
+    isUser = true;
+  }
+
+  res.render("groups", { title: "Все группы", groups: groups, isUser: isUser });
 });
 
 // Удалить ОДНУ группу
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     const group = await Group.findById(req.params.id);
 

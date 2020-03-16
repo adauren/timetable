@@ -1,18 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const Specialty = require("../models/Specialty");
 const Faculty = require("../models/Faculty");
 const Group = require("../models/Group");
 const Lesson = require("../models/Lesson");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const specialties = await Specialty.find();
+
+    let isUser = false;
+    if (req.session.user) {
+      isUser = true;
+    }
+
     res.render("specialties", {
       title: "Все специальности",
-      specialties: specialties
+      specialties: specialties,
+      isUser: isUser
     });
   } catch (err) {
     console.error(err.message);
@@ -21,14 +29,21 @@ router.get("/", async (req, res) => {
 });
 
 // Создать специальность GET
-router.get("/create", async (req, res) => {
+router.get("/create", auth, async (req, res) => {
   const faculties = await Faculty.find();
-  res.render("createSpecialty", { faculties: faculties });
+
+  let isUser = false;
+  if (req.session.user) {
+    isUser = true;
+  }
+
+  res.render("createSpecialty", { faculties: faculties, isUser: isUser });
 });
 
 // Создать специальность POST
 router.post(
   "/create",
+  auth,
   [
     check("name", "Название специальности обязательна к заполнению")
       .not()
@@ -62,6 +77,11 @@ router.get("/:faculty_id", async (req, res) => {
     const specialties = await Specialty.find()
       .where("faculty")
       .equals(req.params.faculty_id);
+
+    let isUser = false;
+    if (req.session.user) {
+      isUser = true;
+    }
     res.json(specialties);
   } catch (err) {
     console.error(err.message);
@@ -70,7 +90,7 @@ router.get("/:faculty_id", async (req, res) => {
 });
 
 // Удалить специальность
-router.get("/delete/:specialty_id", async (req, res) => {
+router.get("/delete/:specialty_id", auth, async (req, res) => {
   try {
     const specialty = await Specialty.findById(req.params.specialty_id);
 

@@ -1,8 +1,18 @@
 const express = require("express");
+/* const cookieParser = require("cookie-parser"); */
+const cookieSession = require("cookie-session");
 const connectDB = require("./config/db");
 const path = require("path");
 
 const app = express();
+/* app.use(cookieParser()); */
+app.set("trust proxy", 1);
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"]
+  })
+);
 
 connectDB();
 

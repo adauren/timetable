@@ -19,18 +19,26 @@ html
 
         #navbarNav
           ul.navbar-nav
-            li.nav-item
-              a(href="/", style="font-size: 20px").nav-link Расписание
-            li.nav-item
-              a(href="/lessons/create", style="font-size: 20px").nav-link Создать занятие
-            li.nav-item
-              a(href="/groups", style="font-size: 20px").nav-link Группы
-            li.nav-item
-              a(href="/specialties", style="font-size: 20px").nav-link Специальности
-            li.nav-item
-              a(href="/faculties", style="font-size: 20px").nav-link Факультеты
-            li.nav-item
-              a(href="/breaks", style="font-size: 20px").nav-link Перерывы
+            if isUser
+              li.nav-item
+                a(href="/", style="font-size: 20px").nav-link Расписание
+              li.nav-item
+                a(href="/lessons/create", style="font-size: 20px").nav-link Создать занятие
+              li.nav-item
+                a(href="/groups", style="font-size: 20px").nav-link Группы
+              li.nav-item
+                a(href="/specialties", style="font-size: 20px").nav-link Специальности
+              li.nav-item
+                a(href="/faculties", style="font-size: 20px").nav-link Факультеты
+              li.nav-item
+                a(href="/breaks", style="font-size: 20px").nav-link Перерывы
+              li.nav-item
+                a(href="/logout", style="font-size: 20px").nav-link#logout Выйти
+            else
+              li.nav-item
+                a(href="/", style="font-size: 20px").nav-link Расписание
+              li.nav-item
+                a(href="/breaks", style="font-size: 20px").nav-link Перерывы
           
         span.navbar-toggler-icon.menu-icon
     

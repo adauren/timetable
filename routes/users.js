@@ -1,17 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 const { check, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const User = require("../models/User");
 
-// @route    POST api/users
-// @desc     Register user
-// @access   Public
+// Создать пользователя POST
 router.post(
   "/",
+  auth,
   [
     check("name", "Имя пользователя обязательна к заполнению")
       .not()
@@ -51,21 +49,9 @@ router.post(
 
       await user.save();
 
-      const payload = {
-        user: {
-          id: user.id
-        }
-      };
+      req.session.user = true;
 
-      jwt.sign(
-        payload,
-        config.get("jwtSecret"),
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      res.redirect("/");
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
@@ -73,7 +59,8 @@ router.post(
   }
 );
 
-router.get("/", (req, res) => {
+// Создать пользователя GET
+router.get("/", auth, (req, res) => {
   res.render("users");
 });
 

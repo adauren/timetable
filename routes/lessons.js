@@ -1,21 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const Lesson = require("../models/Lesson");
 const Group = require("../models/Group");
 const Faculty = require("../models/Faculty");
 
 // Создать урок для группы GET
-router.get("/create", async (req, res) => {
+router.get("/create", auth, async (req, res) => {
   const groups = await Group.find();
   const faculties = await Faculty.find();
-  return res.render("createLesson", { groups: groups, faculties: faculties });
+  let isUser = false;
+  if (req.session.user) {
+    isUser = true;
+  }
+  return res.render("createLesson", {
+    groups: groups,
+    faculties: faculties,
+    isUser: isUser
+  });
 });
 
 // Создать урок для группы POST
 router.post(
   "/create",
+  auth,
   [
     check("groupName", "Выберите группу")
       .not()
@@ -195,10 +205,16 @@ router.get(
         .equals(group.id)
         .sort({ timeOrder: 1 });
 
+      let isUser = false;
+      if (req.session.user) {
+        isUser = true;
+      }
+
       res.render("schedule", {
         lessons: lessons,
         group: group,
-        title: `Расписание группы ${group.name}`
+        title: `Расписание группы ${group.name}`,
+        isUser: isUser
       });
     } catch (err) {
       console.error(err.message);
@@ -208,7 +224,7 @@ router.get(
 );
 
 // Удалить урок
-router.delete("/:lesson_id", async (req, res) => {
+router.delete("/:lesson_id", auth, async (req, res) => {
   try {
     const lesson = await Lesson.findById(req.params.lesson_id);
 

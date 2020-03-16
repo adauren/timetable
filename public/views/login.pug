@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+    .container.mt-4.mb-4
+        form(action=`/login`, method="POST")
+          .form-row
+            .form-group.col-md-6.offset-md-3
+              label(for="email").col-12 Электронная почта
+                input(type="email", name="email")#email.form-control
+            .form-group.col-md-6.offset-md-3
+              label(for="password").col-12 Пароль
+                input(type="password", name="password")#password.form-control
+          button(type="submit", style="background-color: #7d71b1").btn.btn-primary.btn-block.col-md-6.offset-md-3 Войти
