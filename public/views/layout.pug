@@ -14,10 +14,12 @@ html
           a(href="/", style="font-size: 25px").nav-link.brand-link.d-flex.align-items-center 
             span.order-2.ml-4 Расписание ЮКГУ
             img(src="../img/logo.png", style="width: 50px", alt="").order-1
+          button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent",aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
               
             
 
-        #navbarNav
+        #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav
             if isUser
               li.nav-item
