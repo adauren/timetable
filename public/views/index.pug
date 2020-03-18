@@ -3,7 +3,7 @@ extends layout
 block content
   .container.mt-4.mb-4
     if groups.length > 0
-      form(action=`lessons/show`, method="GET")
+      form(action=`lessons/show`, method="GET").text-center
         .form-row
           .form-group.col-md-6.offset-md-3
             label(for="facultyName").col-12 Выберите Факультет
@@ -20,7 +20,7 @@ block content
                 
         button(type="submit", style="background-color: #7d71b1").btn.btn-primary.btn-block.col-md-6.offset-md-3 Показать расписание
 
-        a(href="https://www.instagram.com/adauren08/") Made by Dauren
+        a(href="https://www.instagram.com/adauren08/").mt-5 Made by Dauren
     else
       h5 Список групп пуст
           
