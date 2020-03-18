@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://127.0.0.1:27017/schema-app",
+  "mongoURI": "mongodb+srv://dauren:cluster012@cluster0-co4ms.mongodb.net/test?retryWrites=true&w=majority",
   "jwtSecret": "secret"
 }
