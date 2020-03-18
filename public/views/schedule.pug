@@ -25,7 +25,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
+                  if isUser
+                    a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -38,7 +39,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
+                  if isUser
+                    a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -51,7 +53,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
+                  if isUser
+                    a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -64,7 +67,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
+                  if isUser
+                    a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
       
@@ -77,7 +81,8 @@ block content
                 li.list-group-item
                   h5= lesson.time
                   p= `${lesson.name} - ${lesson.type} - ${lesson.room}`
-                  a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
+                  if isUser
+                    a(href=`/lessons/show?groupName=${group.name}` data-id=`${lesson.id}`).lesson-delete-btn Удалить занятие
           else
             p У группы нет занятии
   
