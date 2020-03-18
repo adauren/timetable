@@ -9,7 +9,6 @@ const User = require("../models/User");
 // Создать пользователя POST
 router.post(
   "/",
-  auth,
   [
     check("name", "Имя пользователя обязательна к заполнению")
       .not()
@@ -60,7 +59,7 @@ router.post(
 );
 
 // Создать пользователя GET
-router.get("/", auth, (req, res) => {
+router.get("/", (req, res) => {
   res.render("users");
 });
 
